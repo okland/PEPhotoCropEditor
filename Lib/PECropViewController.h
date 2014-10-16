@@ -16,6 +16,12 @@
 @property (nonatomic) UIImage *image;
 
 @property (nonatomic) BOOL keepingCropAspectRatio;
+
+/**
+ * Bool - that represnt that we dont let the user change the lock aspect ratio
+ */
+@property (nonatomic) BOOL lockCropAspectRatio;
+
 @property (nonatomic) CGFloat cropAspectRatio;
 
 @property (nonatomic) CGRect cropRect;

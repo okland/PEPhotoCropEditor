@@ -143,6 +143,29 @@ static inline NSString *PELocalizedString(NSString *key, NSString *comment)
     self.cropView.keepingCropAspectRatio = self.keepingCropAspectRatio;
 }
 
+/**
+ *  Lock Crop aspect ratio -
+ *       Dont let user change ratio and change bottom button to "Finish"
+ *
+ *  @param lockingCropAspectRatio - Flag whther to lock ratio
+ */
+- (void)setLockCropAspectRatio:(BOOL)lockingCropAspectRatio
+{
+    [self setKeepingCropAspectRatio:lockingCropAspectRatio];
+    // If setting crop aspect ratio to yes dont show option to change aspect ratio
+    if (lockingCropAspectRatio) {
+        // Change bottom button to Crop
+        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                       target:nil
+                                                                                       action:nil];
+        UIBarButtonItem *finishButton = [[UIBarButtonItem alloc] initWithTitle:PELocalizedString(@"Finish", nil)
+                                                                         style:UIBarButtonItemStyleBordered
+                                                                        target:self
+                                                                        action:@selector(done:)];
+        self.toolbarItems = @[flexibleSpace, finishButton, flexibleSpace];
+    }
+}
+
 - (void)setCropAspectRatio:(CGFloat)cropAspectRatio
 {
     _cropAspectRatio = cropAspectRatio;
